@@ -11,7 +11,7 @@ import com.iut.banque.modele.CompteSansDecouvert;
 public class TestsClient {
 
 	/**
-	 * Tests successifs de la méthode de vérification du format de numéro de
+	 * Tests successifs donatien de la méthode de vérification du format de numéro de
 	 * client
 	 */
 	@Test
