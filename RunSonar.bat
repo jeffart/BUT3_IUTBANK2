@@ -1,0 +1,1 @@
+mvn clean verify sonar:sonar -Dsonar.projectKey=BANK_IUT_2023_bis -Dsonar.projectName='BANK_IUT_2023_bis' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_d718fbf39b76b6f720fb938b8a54e62844e0ebc3

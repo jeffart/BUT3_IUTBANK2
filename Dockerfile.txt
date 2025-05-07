@@ -1,0 +1,27 @@
+# Utiliser une image de base Java pour l'exécution
+FROM openjdk:11-jdk-slim AS build
+RUN apt-get update && apt-get install -y maven
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier le fichier pom.xml et le télécharger les dépendances
+COPY pom.xml .
+RUN mvn -B -f pom.xml dependency:resolve
+
+# Copier le reste du code source
+COPY src ./src
+
+# Exposer le port sur lequel l'application écoute
+EXPOSE 8085
+
+# Compiler le projet et le packager
+RUN mvn clean package -DskipTests
+
+# Deuxième étape : créer l'image finale avec seulement le jar
+FROM openjdk:11-jdk-slim
+
+# Copier le fichier jar généré lors de la phase précédente
+COPY --from=build /app/target/mon-projet-java.jar /app/mon-projet-java.jar
+
+# Définir la commande par défaut pour exécuter l'application
+CMD ["java", "-jar", "/app/mon-projet-java.jar"]

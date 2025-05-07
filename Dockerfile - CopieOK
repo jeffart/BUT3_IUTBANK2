@@ -1,0 +1,19 @@
+FROM maven:3.8.5-openjdk-11 AS build
+
+# Copy settings.xml if needed (e.g., for private repos or proxy)
+# COPY settings.xml /root/.m2/settings.xml
+
+# Set working directory
+WORKDIR /app
+
+# Copy source code
+COPY . .
+
+# Ensure the pom.xml is available in the container
+RUN ls -la pom.xml
+
+# Resolve dependencies
+RUN mvn -B -f pom.xml dependency:resolve
+
+# Build the project
+RUN mvn -B -f pom.xml clean package -DskipTests

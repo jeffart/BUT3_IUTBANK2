@@ -1,0 +1,1 @@
+mvn clean verify sonar:sonar -Dsonar.projectKey=BUT3_2025_BANK -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_e1e74a67c29455325d3af3617a53131ecf2d131a
